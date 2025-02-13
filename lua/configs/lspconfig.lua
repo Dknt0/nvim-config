@@ -16,6 +16,43 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+local on_attach = nvlsp.on_attach
+local capabilities = nvlsp.capabilities
+
+-- clangd config
+lspconfig.clangd.setup {
+  on_attach = function(client, bufnr)
+    client.server_capabilities.signatureHelpProvider = false
+    on_attach(client, bufnr)
+  end,
+  capabilities = capabilities,
+  cmd = {
+    "clangd",
+    "--query-driver=/usr/bin/g++", -- Point clangd to g++
+    "--background-index", -- Enable background indexing
+    "--clang-tidy", -- Enable clang-tidy
+    "--header-insertion=never", -- Disable automatic header insertion
+  },
+}
+
+-- pyright config
+lspconfig.pyright.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = { "python" },
+  settings = {
+    python = {
+      pythonPath = vim.fn.exepath "python3",
+    },
+  },
+}
+
+lspconfig.cmake.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+}
+
 -- configuring single server, example: typescript
 -- lspconfig.ts_ls.setup {
 --   on_attach = nvlsp.on_attach,

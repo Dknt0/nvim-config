@@ -1,3 +1,14 @@
+This is my Neovim config based on [NvChad](https://github.com/NvChad/nvchad). A Neovim version later than 0.10 is required.
+
+Usage:
+
+```shell
+# Install dependencies
+sudo apt install git curl wget nodejs npm
+# Clone the repository
+git clone https://github.com/Dknt0/nvim-config ~/.config/nvim/ && nvim
+```
+
 **This repo is supposed to used as config by NvChad users!**
 
 - The main nvchad repo (NvChad/NvChad) is used as a plugin by this repo.

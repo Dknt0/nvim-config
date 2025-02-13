@@ -13,13 +13,36 @@ return {
     end,
   },
 
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "cpp",
+        "cmake",
+      },
+    },
+  },
+  {
+    "kkoomen/vim-doge",
+    build = ":call doge#install()", -- Run the install command
+    lazy = false, -- Load immediately (not lazy-loaded)
+    config = function()
+      vim.g.doge_enable_mappings = 0 -- Disable default mappings (recommended)
+      vim.g.doge_doc_standard = "doxygen_cpp" -- For C++
+      vim.g.doge_comment_interactive = 1 -- Enable interactive mode
+      vim.g.doge_comment_jump_modes = "r" -- Jump to placeholder after generation
+    end,
+  },
+  {
+    "github/copilot.vim",
+    lazy = false,
+    config = function ()
+      -- TODO
+    end
+  }
 }

@@ -4,7 +4,42 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+---- Dknt customized ----
+-- Exchange code between lines
+map("v", "<C-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+map("v", "<C-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+
+-- `x`, `d` to null buffer
+map("x", "p", '"_dP')
+map("n", "y", '"+y')
+map("v", "y", '"+y')
+map("n", "Y", '"+Y')
+map("n", "d", '"_d')
+map("v", "d", '"_d')
+map("n", "x", '"+x')
+map("v", "x", '"+x')
+
+-- Move the view
+map({ "n", "v" }, "<A-j>", "<C-e>", { noremap = true, silent = true })
+map({ "n", "v" }, "<A-k>", "<C-y>", { noremap = true, silent = true })
+map("i", "<A-j>", "<Esc><C-e>a", { noremap = true, silent = true })
+map("i", "<A-k>", "<Esc><C-y>a", { noremap = true, silent = true })
+
+map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
+map("i", "<C-x>", "<Esc> dbi", { noremap = true, silent = true })
+
+-- Doge DocGen
+map("n", "<Leader>d", ":DogeGenerate 1<CR>", { noremap = true, silent = true })
+
+-- Copilot
+map("i", "`<Tab>", 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false,
+})
+vim.g.copilot_no_tab_map = true
+
+map({ "n", "v", "i" }, "<C-u>", "<C-i>", { noremap = true, silent = true })
