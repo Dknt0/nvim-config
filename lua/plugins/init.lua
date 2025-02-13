@@ -12,7 +12,10 @@ return {
       require "configs.lspconfig"
     end,
   },
-
+  {
+	    "nvim-lua/plenary.nvim",
+	      module = "plenary"
+      },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {

@@ -7,6 +7,8 @@ Usage:
 sudo apt install git curl wget nodejs npm
 # Clone the repository
 git clone https://github.com/Dknt0/nvim-config ~/.config/nvim/ && nvim
+# To install LSP plugins, type this command in nvim
+:MasonInstallAll
 ```
 
 **This repo is supposed to used as config by NvChad users!**
