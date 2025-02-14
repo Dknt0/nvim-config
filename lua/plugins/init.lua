@@ -13,9 +13,9 @@ return {
     end,
   },
   {
-	    "nvim-lua/plenary.nvim",
-	      module = "plenary"
-      },
+    "nvim-lua/plenary.nvim",
+    module = "plenary",
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -44,8 +44,8 @@ return {
   {
     "github/copilot.vim",
     lazy = false,
-    config = function ()
+    config = function()
       -- TODO
-    end
-  }
+    end,
+  },
 }
