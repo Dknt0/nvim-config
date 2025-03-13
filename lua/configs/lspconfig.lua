@@ -32,6 +32,7 @@ lspconfig.clangd.setup {
     "--background-index", -- Enable background indexing
     "--clang-tidy", -- Enable clang-tidy
     "--header-insertion=never", -- Disable automatic header insertion
+    "--completion-style=detailed", --completion-style=detailed""
   },
 }
 

@@ -1,15 +1,26 @@
-This is my Neovim config based on [NvChad](https://github.com/NvChad/nvchad). A Neovim version later than 0.10 is required.
+This is my Neovim config based on [NvChad](https://github.com/NvChad/nvchad), aiming to be deployed within 2 minutes.
 
-Usage:
+A Neovim version later than 0.10 is required. You can install the latest released neovim from github, or you can install it with `snap`.
+
+```shell
+curl -L https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.appimage > nvim
+chmod 775 nvim
+```
+
+Then install the config:
 
 ```shell
 # Install dependencies
-sudo apt install git curl wget nodejs npm
+sudo apt install git curl wget nodejs npm python3-venv ripgrep
 # Clone the repository
 git clone https://github.com/Dknt0/nvim-config ~/.config/nvim/ && nvim
 # To install LSP plugins, type this command in nvim
 :MasonInstallAll
 ```
+
+> Below is the original README from NvChad
+
+---
 
 **This repo is supposed to used as config by NvChad users!**
 
