@@ -1,4 +1,4 @@
-This is my Neovim config based on [NvChad](https://github.com/NvChad/nvchad), aiming to be deployed within 2 minutes.
+This is my Neovim config based on [NvChad](https://github.com/NvChad/nvchad), aiming to be deployed from scratch within 2 minutes.
 
 A Neovim version later than 0.10 is required. You can install the latest released neovim from github, or you can install it with `snap`.
 

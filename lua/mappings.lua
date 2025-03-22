@@ -35,6 +35,7 @@ map("i", "<C-x>", "<Esc> dbi", { noremap = true, silent = true })
 -- Doge DocGen
 vim.api.nvim_del_keymap("n", "<leader>d")
 map("n", "<Leader>dg", ":DogeGenerate 1<CR>", { noremap = true, silent = true })
+map({"i" }, "jj", "<Plug>(doge-comment-jump-forward)")
 
 -- Copilot
 map("i", "`<Tab>", 'copilot#Accept("\\<CR>")', {
@@ -48,3 +49,6 @@ map({ "n", "v", "i" }, "<C-u>", "<C-i>", { noremap = true, silent = true })
 -- DAP
 map("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>", { desc = "Add breakpoint at line" })
 map("n", "<leader>dr", "<cmd>DapContinue<CR>", { desc = "Start or continue the debugger" })
+map("n", "<leader>dt", "<cmd>DapStepOver<CR>", { desc = "" })
+map("n", "<leader>di", "<cmd>DapStepInto<CR>", { desc = "" })
+map("n", "<leader>do", "<cmd>DapStepOut<CR>", { desc = "" })
