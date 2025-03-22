@@ -35,7 +35,7 @@ map("i", "<C-x>", "<Esc> dbi", { noremap = true, silent = true })
 -- Doge DocGen
 vim.api.nvim_del_keymap("n", "<leader>d")
 map("n", "<Leader>dg", ":DogeGenerate 1<CR>", { noremap = true, silent = true })
-map({"i" }, "jj", "<Plug>(doge-comment-jump-forward)")
+map({"i" }, "kk", "<Plug>(doge-comment-jump-forward)")
 
 -- Copilot
 map("i", "`<Tab>", 'copilot#Accept("\\<CR>")', {
