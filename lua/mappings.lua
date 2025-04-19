@@ -41,14 +41,14 @@ map({"i" }, "kk", "<Plug>(doge-comment-jump-forward)")
 map("i", "`<Tab>", 'copilot#Accept("\\<CR>")', {
   expr = true,
   replace_keycodes = false,
-})
-vim.g.copilot_no_tab_map = true
+}) vim.g.copilot_no_tab_map = true
 
+map({ "n", "v", "i" }, "<C-f>", "<C-u>", { noremap = true, silent = true })
 map({ "n", "v", "i" }, "<C-u>", "<C-i>", { noremap = true, silent = true })
 
 -- DAP
 map("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>", { desc = "Add breakpoint at line" })
 map("n", "<leader>dr", "<cmd>DapContinue<CR>", { desc = "Start or continue the debugger" })
-map("n", "<leader>dt", "<cmd>DapStepOver<CR>", { desc = "" })
-map("n", "<leader>di", "<cmd>DapStepInto<CR>", { desc = "" })
-map("n", "<leader>do", "<cmd>DapStepOut<CR>", { desc = "" })
+map("n", "<leader>dt", "<cmd>DapStepOver<CR>", { desc = "Step over" })
+map("n", "<leader>di", "<cmd>DapStepInto<CR>", { desc = "Step into" })
+map("n", "<leader>do", "<cmd>DapStepOut<CR>", { desc = "Step out" })
