@@ -10,8 +10,12 @@ chmod 775 nvim
 Then install the config:
 
 ```shell
+# Install Node.js following https://nodejs.org/en/download
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
+\. "$HOME/.nvm/nvm.sh"
+nvm install 22
 # Install dependencies
-sudo apt install git curl wget nodejs npm python3-venv ripgrep
+sudo apt install git curl wget python3-venv ripgrep
 # Clone the repository
 git clone https://github.com/Dknt0/nvim-config ~/.config/nvim/ && nvim
 # To install LSP plugins, type this command in nvim
