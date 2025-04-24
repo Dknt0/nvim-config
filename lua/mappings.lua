@@ -35,13 +35,14 @@ map("i", "<C-x>", "<Esc> dbi", { noremap = true, silent = true })
 -- Doge DocGen
 vim.api.nvim_del_keymap("n", "<leader>d")
 map("n", "<Leader>dg", ":DogeGenerate 1<CR>", { noremap = true, silent = true })
-map({"i" }, "kk", "<Plug>(doge-comment-jump-forward)")
+map({ "i" }, "kk", "<Plug>(doge-comment-jump-forward)")
 
 -- Copilot
-map("i", "`<Tab>", 'copilot#Accept("\\<CR>")', {
-  expr = true,
-  replace_keycodes = false,
-}) vim.g.copilot_no_tab_map = true
+-- map("i", "`<Tab>", 'copilot#Accept("\\<CR>")', {
+--   expr = true,
+--   replace_keycodes = false,
+-- })
+-- vim.g.copilot_no_tab_map = true
 
 map({ "n", "v", "i" }, "<C-f>", "<C-u>", { noremap = true, silent = true })
 map({ "n", "v", "i" }, "<C-u>", "<C-i>", { noremap = true, silent = true })
