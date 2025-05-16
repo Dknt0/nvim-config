@@ -39,8 +39,7 @@ return {
         "cmake",
       },
     },
-  },
-  {
+  }, {
     "kkoomen/vim-doge",
     build = ":call doge#install()", -- Run the install command
     lazy = false, -- Load immediately (not lazy-loaded)
@@ -64,11 +63,9 @@ return {
       { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
     },
     build = "make tiktoken", -- Only on MacOS or Linux
-    opts = {
-    },
+    opts = {},
     config = function()
-
-      require('configs.copilot')
+      require "configs.copilot"
     end,
   },
   {
@@ -152,6 +149,7 @@ return {
       scroll_buffer_space = true,
       legacy_computing_symbols_support = false,
       smear_insert_mode = true,
+      cursor_color = "#cfb7ef",
     },
   },
   {
