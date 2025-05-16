@@ -36,4 +36,4 @@ vim.schedule(function()
   require "mappings"
 end)
 
-require "configs.copilot"
+-- require "configs.copilot"

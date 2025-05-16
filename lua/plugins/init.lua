@@ -54,9 +54,7 @@ return {
   {
     "github/copilot.vim",
     lazy = false,
-    config = function()
-      -- TODO
-    end,
+    config = function() end,
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
@@ -64,13 +62,14 @@ return {
     dependencies = {
       { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
       { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-      -- { "ravitemer/mcphub.nvim" },
     },
     build = "make tiktoken", -- Only on MacOS or Linux
     opts = {
-      -- See Configuration section for options
     },
-    -- See Commands section for default commands if you want to lazy load on them
+    config = function()
+
+      require('configs.copilot')
+    end,
   },
   {
     "nvim-neotest/nvim-nio",
@@ -114,15 +113,52 @@ return {
   {
     "mfussenegger/nvim-dap",
   },
-  -- {
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --   event = "VeryLazy",
-  --   opts = function()
-  --     return require "custom.configs.null-ls"
-  --   end,
-  -- },
-  -- {
-  --   "stevearc/overseer.nvim",
-  --   opts = {},
-  -- },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    config = function()
+      vim.g.mkdp_auto_start = 0 -- Don't auto-start
+      vim.g.mkdp_auto_close = 1 -- Auto close when changing buffers
+      vim.g.mkdp_refresh_slow = 0 -- Refresh on save or leaving insert mode
+      vim.g.mkdp_browser = "google-chrome" -- Use default browser
+      vim.g.mkdp_preview_options = {
+        mkit = {},
+        katex = {},
+        uml = {},
+        maid = {},
+        disable_sync_scroll = 0,
+        sync_scroll_type = "middle",
+        hide_yaml_meta = 1,
+        sequence_diagrams = {},
+        flowchart_diagrams = {},
+        content_editable = false,
+        disable_filename = 0,
+        toc = {},
+      }
+      vim.g.mkdp_theme = "dark"
+    end,
+    ft = { "markdown" },
+  },
+  {
+    "sphamba/smear-cursor.nvim",
+    lazy = false,
+    opts = {
+      smear_between_buffers = true,
+      smear_between_neighbor_lines = true,
+      scroll_buffer_space = true,
+      legacy_computing_symbols_support = false,
+      smear_insert_mode = true,
+    },
+  },
+  {
+    "karb94/neoscroll.nvim",
+    event = "VeryLazy",
+    config = function()
+      require "configs.neoscroll"
+    end,
+  },
 }

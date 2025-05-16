@@ -23,10 +23,10 @@ map("n", "x", '"+x')
 map("v", "x", '"+x')
 
 -- Move the view
-map({ "n", "v" }, "<A-j>", "<C-e>", { noremap = true, silent = true })
-map({ "n", "v" }, "<A-k>", "<C-y>", { noremap = true, silent = true })
-map("i", "<A-j>", "<Esc><C-e>a", { noremap = true, silent = true })
-map("i", "<A-k>", "<Esc><C-y>a", { noremap = true, silent = true })
+-- map({ "n", "v" }, "<A-j>", "<C-e>", { noremap = true, silent = true })
+-- map({ "n", "v" }, "<A-k>", "<C-y>", { noremap = true, silent = true })
+-- map("i", "<A-j>", "<Esc><C-e>a", { noremap = true, silent = true })
+-- map("i", "<A-k>", "<Esc><C-y>a", { noremap = true, silent = true })
 
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
@@ -44,7 +44,7 @@ map({ "i" }, "kk", "<Plug>(doge-comment-jump-forward)")
 -- })
 -- vim.g.copilot_no_tab_map = true
 
-map({ "n", "v", "i" }, "<C-f>", "<C-u>", { noremap = true, silent = true })
+-- map({ "n", "v", "i" }, "<C-f>", "<C-u>", { noremap = true, silent = true })
 map({ "n", "v", "i" }, "<C-u>", "<C-i>", { noremap = true, silent = true })
 
 -- DAP
