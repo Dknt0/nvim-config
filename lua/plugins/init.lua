@@ -39,7 +39,8 @@ return {
         "cmake",
       },
     },
-  }, {
+  },
+  {
     "kkoomen/vim-doge",
     build = ":call doge#install()", -- Run the install command
     lazy = false, -- Load immediately (not lazy-loaded)
@@ -158,5 +159,36 @@ return {
     config = function()
       require "configs.neoscroll"
     end,
+  },
+  {
+    "m4xshen/hardtime.nvim",
+    lazy = false,
+    dependencies = { "MunifTanjim/nui.nvim" },
+    opts = {},
+    config = function()
+      require("hardtime").setup()
+    end,
+  },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      explorer = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      picker = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = false },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+    },
   },
 }
