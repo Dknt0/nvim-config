@@ -164,10 +164,12 @@ return {
     "m4xshen/hardtime.nvim",
     lazy = false,
     dependencies = { "MunifTanjim/nui.nvim" },
-    opts = {},
-    config = function()
-      require("hardtime").setup()
-    end,
+    -- config = function()
+    --   require("hardtime").setup()
+    -- end,
+    opts = {
+      disable_mouse = false,
+    },
   },
   {
     "folke/snacks.nvim",
