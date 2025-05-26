@@ -5,6 +5,7 @@ local options = {
     -- html = { "prettier" },
     python = { "black" },
     cpp = { "clang-format" },
+    rust = { "rustfmt" },
   },
 
   format_on_save = {
