@@ -81,7 +81,7 @@ return {
     opts = {
       provider = "copilot",
       copilot = {
-        model = "claude-3.7-sonnet",
+        model = "claude-sonnet-4",
         timeout = 60000,
         debounce = 300,
         max_completion_tokens = 16384,
