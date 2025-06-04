@@ -204,10 +204,10 @@ return {
     opts = {
       disable_mouse = false,
       restricted_keys = {
-        ["j"] = {},
-        ["k"] = {},
-        ["h"] = {},
-        ["l"] = {},
+       -- ["j"] = {},
+        -- ["k"] = {},
+        -- ["h"] = {},
+        -- ["l"] = {},
       },
     },
   },
