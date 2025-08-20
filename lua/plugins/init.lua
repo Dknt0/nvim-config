@@ -79,12 +79,17 @@ return {
     event = "VeryLazy",
     version = false, -- Never set this value to "*"! Never!
     opts = {
-      provider = "copilot",
-      copilot = {
-        model = "claude-sonnet-4",
-        timeout = 60000,
-        debounce = 300,
-        max_completion_tokens = 16384,
+      -- provider = "copilot",
+      -- copilot = {
+      --   model = "claude-sonnet-4",
+      --   timeout = 60000,
+      --   debounce = 300,
+      --   max_completion_tokens = 16384,
+      -- },
+      provider = "claude",
+      claude = {
+        endpoint = "https://chat.cloudapi.vip",
+        model = "claude-sonnet-4-20250514",
       },
     },
     build = "make",
@@ -204,7 +209,7 @@ return {
     opts = {
       disable_mouse = false,
       restricted_keys = {
-       -- ["j"] = {},
+        -- ["j"] = {},
         -- ["k"] = {},
         -- ["h"] = {},
         -- ["l"] = {},
