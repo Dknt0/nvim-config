@@ -87,10 +87,12 @@ return {
       --   max_completion_tokens = 16384,
       -- },
       provider = "claude",
-      claude = {
-        endpoint = "https://chat.cloudapi.vip",
-        model = "claude-sonnet-4-20250514",
-      },
+      providers = {
+        claude = {
+          endpoint = "https://chat.cloudapi.vip",
+          model = "claude-sonnet-4-20250514",
+        },
+      }
     },
     build = "make",
     dependencies = {
