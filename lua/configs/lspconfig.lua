@@ -1,7 +1,7 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
+-- local lspconfig = require "lspconfig"
 
 -- EXAMPLE
 local servers = { "html", "cssls" }
@@ -9,18 +9,19 @@ local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  vim.lsp.config(lsp, {
     on_attach = nvlsp.on_attach,
     on_init = nvlsp.on_init,
     capabilities = nvlsp.capabilities,
-  }
+  })
+  vim.lsp.enable(lsp)
 end
 
 local on_attach = nvlsp.on_attach
 local capabilities = nvlsp.capabilities
 
 -- clangd config
-lspconfig.clangd.setup {
+vim.lsp.config("clangd", {
   on_attach = function(client, bufnr)
     client.server_capabilities.signatureHelpProvider = false
     on_attach(client, bufnr)
@@ -34,10 +35,11 @@ lspconfig.clangd.setup {
     "--header-insertion=never", -- Disable automatic header insertion
     "--completion-style=detailed", --completion-style=detailed""
   },
-}
+})
+vim.lsp.enable "clangd"
 
 -- pyright config
-lspconfig.pyright.setup {
+vim.lsp.config("pyright", {
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = { "python" },
@@ -46,16 +48,18 @@ lspconfig.pyright.setup {
       pythonPath = vim.fn.exepath "python3",
     },
   },
-}
+})
+vim.lsp.enable "pyright"
 
-lspconfig.cmake.setup {
+vim.lsp.config("cmake", {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
-}
+})
+vim.lsp.enable "cmake"
 
 -- rust-analyzer config
-lspconfig.rust_analyzer.setup {
+vim.lsp.config("rust_analyzer", {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -69,7 +73,8 @@ lspconfig.rust_analyzer.setup {
       },
     },
   },
-}
+})
+vim.lsp.enable "rust_analyzer"
 
 -- configuring single server, example: typescript
 -- lspconfig.ts_ls.setup {
