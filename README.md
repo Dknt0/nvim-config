@@ -3,7 +3,7 @@ This is my Neovim config based on [NvChad](https://github.com/NvChad/nvchad), ai
 A Neovim version later than 0.10 is required. You can install the latest released neovim from github, or you can install it with `snap`.
 
 ```shell
-curl -L https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.appimage > nvim
+curl -L https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-x86_64.appimage > nvim
 chmod 775 nvim
 ```
 
