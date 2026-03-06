@@ -80,25 +80,45 @@ return {
   -- },
   {
     "yetone/avante.nvim",
+    build = vim.fn.has "win32" ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+      or "make",
     event = "VeryLazy",
     version = false, -- Never set this value to "*"! Never!
     opts = {
+      instructions_file = "avante.md",
       -- provider = "copilot",
-      -- copilot = {
-      --   model = "claude-sonnet-4",
-      --   timeout = 60000,
-      --   debounce = 300,
-      --   max_completion_tokens = 16384,
+      -- providers = {
+      --   copilot = {
+      --     model = "claude-sonnet-4",
+      --     timeout = 60000,
+      --     debounce = 300,
+      --     max_completion_tokens = 16384,
+      --   },
       -- },
-      provider = "claude",
+      provider = "openai",
+      -- auto_suggestions_provider = "openai",
       providers = {
         claude = {
           endpoint = "https://chat.cloudapi.vip",
           model = "claude-sonnet-4-20250514",
+          extra_request_body = {
+            temperature = 0.75,
+            max_tokens = 40960,
+          },
         },
-      }
+        openai = {
+          endpoint = "https://chat.cloudapi.vip/v1",
+          model = "gpt-5",
+          extra_request_body = {
+            temperature = 0.75,
+            max_tokens = 4096,
+          },
+        },
+      },
     },
-    build = "make",
+    -- behavior = {
+    --   auto_suggestions = true,
+    -- },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "stevearc/dressing.nvim",
@@ -107,7 +127,7 @@ return {
       "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
       "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
       "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      -- "zbirenbaum/copilot.lua", -- for providers='copilot'
       {
         "MeanderingProgrammer/render-markdown.nvim",
         opts = {
