@@ -78,64 +78,101 @@ return {
   --     require "configs.copilot"
   --   end,
   -- },
+  -- {
+  --   "yetone/avante.nvim",
+  --   build = vim.fn.has "win32" ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+  --     or "make",
+  --   event = "VeryLazy",
+  --   version = false, -- Never set this value to "*"! Never!
+  --   opts = {
+  --     instructions_file = "avante.md",
+  --     -- provider = "copilot",
+  --     -- providers = {
+  --     --   copilot = {
+  --     --     model = "claude-sonnet-4",
+  --     --     timeout = 60000,
+  --     --     debounce = 300,
+  --     --     max_completion_tokens = 16384,
+  --     --   },
+  --     -- },
+  --     provider = "openai",
+  --     -- auto_suggestions_provider = "openai",
+  --     providers = {
+  --       claude = {
+  --         endpoint = "https://chat.cloudapi.vip",
+  --         model = "claude-sonnet-4-20250514",
+  --         extra_request_body = {
+  --           temperature = 0.75,
+  --           max_tokens = 40960,
+  --         },
+  --       },
+  --       openai = {
+  --         endpoint = "https://chat.cloudapi.vip/v1",
+  --         model = "gpt-5",
+  --         extra_request_body = {
+  --           temperature = 0.75,
+  --           max_tokens = 4096,
+  --         },
+  --       },
+  --     },
+  --   },
+  --   -- behavior = {
+  --   --   auto_suggestions = true,
+  --   -- },
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "stevearc/dressing.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+  --     "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+  --     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+  --     -- "zbirenbaum/copilot.lua", -- for providers='copilot'
+  --     {
+  --       "MeanderingProgrammer/render-markdown.nvim",
+  --       opts = {
+  --         file_types = { "markdown", "Avante" },
+  --       },
+  --       ft = { "markdown", "Avante" },
+  --     },
+  --   },
+  -- },
   {
-    "yetone/avante.nvim",
-    build = vim.fn.has "win32" ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-      or "make",
-    event = "VeryLazy",
-    version = false, -- Never set this value to "*"! Never!
+    "olimorris/codecompanion.nvim",
+    version = "^19.0.0",
+    event = "BufReadPre",
     opts = {
-      instructions_file = "avante.md",
-      -- provider = "copilot",
-      -- providers = {
-      --   copilot = {
-      --     model = "claude-sonnet-4",
-      --     timeout = 60000,
-      --     debounce = 300,
-      --     max_completion_tokens = 16384,
-      --   },
-      -- },
-      provider = "openai",
-      -- auto_suggestions_provider = "openai",
-      providers = {
-        claude = {
-          endpoint = "https://chat.cloudapi.vip",
+      adapters = {
+        http = {
+          anthropic = function()
+            return require("codecompanion.adapters").extend("anthropic", {
+              url = "https://chat.cloudapi.vip/v1/messages",
+              env = {
+                api_key = "ANTHROPIC_API_KEY",
+              },
+            })
+          end,
+        },
+      },
+      interactions = {
+        chat = {
+          adapter = "anthropic",
           model = "claude-sonnet-4-20250514",
-          extra_request_body = {
-            temperature = 0.75,
-            max_tokens = 40960,
-          },
         },
-        openai = {
-          endpoint = "https://chat.cloudapi.vip/v1",
-          model = "gpt-5",
-          extra_request_body = {
-            temperature = 0.75,
-            max_tokens = 4096,
-          },
+        inline = {
+          adapter = "anthropic",
+          model = "claude-sonnet-4-20250514",
         },
       },
     },
-    -- behavior = {
-    --   auto_suggestions = true,
-    -- },
     dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      -- "zbirenbaum/copilot.lua", -- for providers='copilot'
-      {
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
+      "nvim-treesitter/nvim-treesitter",
     },
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "codecompanion" },
   },
   {
     "nvim-neotest/nvim-nio",
