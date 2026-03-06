@@ -152,16 +152,28 @@ return {
               },
             })
           end,
+          openai = function()
+            return require("codecompanion.adapters").extend("openai", {
+              url = "https://chat.cloudapi.vip/v1/chat/completions",
+              env = {
+                api_key = "OPENAI_API_KEY",
+              },
+            })
+          end,
         },
       },
       interactions = {
         chat = {
-          adapter = "anthropic",
-          model = "claude-sonnet-4-20250514",
+          -- adapter = "anthropic",
+          -- model = "claude-sonnet-4-20250514",
+          adapter = "openai",
+          model = "gpt-5",
         },
         inline = {
-          adapter = "anthropic",
-          model = "claude-sonnet-4-20250514",
+          -- adapter = "anthropic",
+          -- model = "claude-sonnet-4-20250514",
+          adapter = "openai",
+          model = "gpt-5",
         },
       },
     },
