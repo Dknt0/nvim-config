@@ -140,7 +140,7 @@ return {
   {
     "olimorris/codecompanion.nvim",
     version = "^19.0.0",
-    event = "BufReadPre",
+    event = "VeryLazy",
     opts = {
       adapters = {
         http = {
@@ -158,22 +158,21 @@ return {
               env = {
                 api_key = "OPENAI_API_KEY",
               },
+              schema = {
+                model = {
+                  default = "gpt-5-codex",
+                },
+              },
             })
           end,
         },
       },
       interactions = {
         chat = {
-          -- adapter = "anthropic",
-          -- model = "claude-sonnet-4-20250514",
           adapter = "openai",
-          model = "gpt-5",
         },
         inline = {
-          -- adapter = "anthropic",
-          -- model = "claude-sonnet-4-20250514",
           adapter = "openai",
-          model = "gpt-5",
         },
       },
     },
