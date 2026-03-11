@@ -150,6 +150,11 @@ return {
               env = {
                 api_key = "ANTHROPIC_API_KEY",
               },
+              schema = {
+                model = {
+                  default = "claude-opus-4-6-code",
+                },
+              },
             })
           end,
           openai = function()
@@ -160,7 +165,7 @@ return {
               },
               schema = {
                 model = {
-                  default = "gpt-5-codex",
+                  default = "claude-opus-4-6-code",
                 },
               },
             })
@@ -169,10 +174,10 @@ return {
       },
       interactions = {
         chat = {
-          adapter = "openai",
+          adapter = "anthropic",
         },
         inline = {
-          adapter = "openai",
+          adapter = "anthropic",
         },
       },
     },
