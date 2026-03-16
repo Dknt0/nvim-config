@@ -41,6 +41,7 @@ return {
         "yaml",
         "json",
         "markdown",
+        "markdown_inline",
       },
     },
   },
@@ -65,78 +66,6 @@ return {
       })
     end,
   },
-  -- {
-  --   "CopilotC-Nvim/CopilotChat.nvim",
-  --   lazy = false,
-  --   dependencies = {
-  --     { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
-  --     { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-  --   },
-  --   build = "make tiktoken", -- Only on MacOS or Linux
-  --   opts = {},
-  --   config = function()
-  --     require "configs.copilot"
-  --   end,
-  -- },
-  -- {
-  --   "yetone/avante.nvim",
-  --   build = vim.fn.has "win32" ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
-  --     or "make",
-  --   event = "VeryLazy",
-  --   version = false, -- Never set this value to "*"! Never!
-  --   opts = {
-  --     instructions_file = "avante.md",
-  --     -- provider = "copilot",
-  --     -- providers = {
-  --     --   copilot = {
-  --     --     model = "claude-sonnet-4",
-  --     --     timeout = 60000,
-  --     --     debounce = 300,
-  --     --     max_completion_tokens = 16384,
-  --     --   },
-  --     -- },
-  --     provider = "openai",
-  --     -- auto_suggestions_provider = "openai",
-  --     providers = {
-  --       claude = {
-  --         endpoint = "https://chat.cloudapi.vip",
-  --         model = "claude-sonnet-4-20250514",
-  --         extra_request_body = {
-  --           temperature = 0.75,
-  --           max_tokens = 40960,
-  --         },
-  --       },
-  --       openai = {
-  --         endpoint = "https://chat.cloudapi.vip/v1",
-  --         model = "gpt-5",
-  --         extra_request_body = {
-  --           temperature = 0.75,
-  --           max_tokens = 4096,
-  --         },
-  --       },
-  --     },
-  --   },
-  --   -- behavior = {
-  --   --   auto_suggestions = true,
-  --   -- },
-  --   dependencies = {
-  --     "nvim-treesitter/nvim-treesitter",
-  --     "stevearc/dressing.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "MunifTanjim/nui.nvim",
-  --     "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-  --     "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-  --     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-  --     -- "zbirenbaum/copilot.lua", -- for providers='copilot'
-  --     {
-  --       "MeanderingProgrammer/render-markdown.nvim",
-  --       opts = {
-  --         file_types = { "markdown", "Avante" },
-  --       },
-  --       ft = { "markdown", "Avante" },
-  --     },
-  --   },
-  -- },
   {
     "olimorris/codecompanion.nvim",
     version = "^19.0.0",
@@ -146,26 +75,30 @@ return {
         http = {
           anthropic = function()
             return require("codecompanion.adapters").extend("anthropic", {
-              url = "https://chat.cloudapi.vip/v1/messages",
+              -- url = "https://chat.cloudapi.vip/v1/messages",
+              url = "https://open.bigmodel.cn/api/paas/v4/messages",
               env = {
                 api_key = "ANTHROPIC_API_KEY",
               },
               schema = {
                 model = {
-                  default = "claude-opus-4-6-code",
+                  -- default = "claude-opus-4-5-20251101-code",
+                  default = "gpt-5.3-codex-medium",
                 },
               },
             })
           end,
           openai = function()
             return require("codecompanion.adapters").extend("openai", {
-              url = "https://chat.cloudapi.vip/v1/chat/completions",
+              -- url = "https://chat.cloudapi.vip/v1/chat/completions",
+              url = "https://open.bigmodel.cn/api/paas/v4/chat/completions",
               env = {
-                api_key = "OPENAI_API_KEY",
+                api_key = "Z_AI_API_KEY",
               },
               schema = {
                 model = {
-                  default = "claude-opus-4-6-code",
+                  -- default = "claude-opus-4-6-code",
+                  default = "glm-4.7",
                 },
               },
             })
@@ -174,10 +107,10 @@ return {
       },
       interactions = {
         chat = {
-          adapter = "anthropic",
+          adapter = "openai",
         },
         inline = {
-          adapter = "anthropic",
+          adapter = "openai",
         },
       },
     },
@@ -232,36 +165,36 @@ return {
   {
     "mfussenegger/nvim-dap",
   },
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = "cd app && npm install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    config = function()
-      vim.g.mkdp_auto_start = 0 -- Don't auto-start
-      vim.g.mkdp_auto_close = 1 -- Auto close when changing buffers
-      vim.g.mkdp_refresh_slow = 0 -- Refresh on save or leaving insert mode
-      vim.g.mkdp_browser = "google-chrome" -- Use default browser
-      vim.g.mkdp_preview_options = {
-        mkit = {},
-        katex = {},
-        uml = {},
-        maid = {},
-        disable_sync_scroll = 0,
-        sync_scroll_type = "middle",
-        hide_yaml_meta = 1,
-        sequence_diagrams = {},
-        flowchart_diagrams = {},
-        content_editable = false,
-        disable_filename = 0,
-        toc = {},
-      }
-      vim.g.mkdp_theme = "dark"
-    end,
-    ft = { "markdown" },
-  },
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  --   build = "cd app && npm install",
+  --   init = function()
+  --     vim.g.mkdp_filetypes = { "markdown" }
+  --   end,
+  --   config = function()
+  --     vim.g.mkdp_auto_start = 0 -- Don't auto-start
+  --     vim.g.mkdp_auto_close = 1 -- Auto close when changing buffers
+  --     vim.g.mkdp_refresh_slow = 0 -- Refresh on save or leaving insert mode
+  --     vim.g.mkdp_browser = "google-chrome" -- Use default browser
+  --     vim.g.mkdp_preview_options = {
+  --       mkit = {},
+  --       katex = {},
+  --       uml = {},
+  --       maid = {},
+  --       disable_sync_scroll = 0,
+  --       sync_scroll_type = "middle",
+  --       hide_yaml_meta = 1,
+  --       sequence_diagrams = {},
+  --       flowchart_diagrams = {},
+  --       content_editable = false,
+  --       disable_filename = 0,
+  --       toc = {},
+  --     }
+  --     vim.g.mkdp_theme = "dark"
+  --   end,
+  --   ft = { "markdown" },
+  -- },
   {
     "sphamba/smear-cursor.nvim",
     lazy = false,
