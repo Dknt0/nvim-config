@@ -3,7 +3,7 @@ This is my Neovim config based on [NvChad](https://github.com/NvChad/nvchad), ai
 A Neovim version later than 0.10 is required. You can install the latest released neovim from github, or you can install it with `snap`.
 
 ```shell
-curl -L https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-x86_64.appimage > nvim
+curl -L https://github.com/neovim/neovim/releases/download/v0.12.2/nvim-linux-x86_64.appimage > nvim
 chmod 775 nvim
 ```
 
@@ -21,6 +21,24 @@ git clone https://github.com/Dknt0/nvim-config ~/.config/nvim/ && nvim
 # To install LSP plugins, type this command in nvim
 :MasonInstallAll
 ```
+
+### Post-install: Treesitter setup
+
+If you are using **Neovim 0.12+**, you need to install the `tree-sitter` CLI and recompile parsers after the first launch:
+
+```shell
+# Install tree-sitter CLI (required by nvim-treesitter main branch)
+npm install -g tree-sitter-cli
+```
+
+Then in Neovim, run `:TSInstallAll` to compile all parsers. If you encounter highlight errors like `attempt to call method 'range' (a nil value)`, make sure `nvim-treesitter` is on the `main` branch (not `master`):
+
+```shell
+cd ~/.local/share/nvim/lazy/nvim-treesitter
+git checkout main
+```
+
+Then restart Neovim and run `:TSInstallAll` again.
 
 > Below is the original README from NvChad
 
