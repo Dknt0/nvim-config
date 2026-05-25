@@ -40,6 +40,12 @@ git checkout main
 
 Then restart Neovim and run `:TSInstallAll` again.
 
+For LaTeX:
+
+```shell
+sudo apt install latexmk zathura
+```
+
 > Below is the original README from NvChad
 
 ---
