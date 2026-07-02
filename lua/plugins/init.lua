@@ -69,7 +69,32 @@ return {
   {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
-    config = true,
+    config = function()
+      require("claudecode").setup({})
+      -- claudecode.nvim drives Snacks with `auto_insert = true`, which makes
+      -- Snacks register a buffer-local BufEnter -> startinsert autocmd on the
+      -- Claude terminal. That means plain window navigation (Ctrl-w, :wincmd,
+      -- etc.) drops you into terminal mode and snaps the viewport to the
+      -- prompt, which gets in the way of scrolling chat history and yanking
+      -- text. The plugin's own ClaudeCode / ClaudeCodeFocus commands already
+      -- call startinsert explicitly (see start_insert_if_terminal in
+      -- terminal/snacks.lua), so disabling auto_insert only affects plain
+      -- window navigation -- toggling/focusing still enters terminal mode at
+      -- the prompt as before.
+      local Snacks_ok, Snacks = pcall(require, "snacks")
+      if Snacks_ok and Snacks.terminal and not Snacks.terminal._cc_no_auto_insert then
+        local original_open = Snacks.terminal.open
+        Snacks.terminal.open = function(cmd, opts)
+          opts = vim.tbl_deep_extend("force", {}, opts or {})
+          local cmd_str = type(cmd) == "table" and table.concat(cmd, " ") or tostring(cmd)
+          if cmd_str:find("claude") then
+            opts.auto_insert = false
+          end
+          return original_open(cmd, opts)
+        end
+        Snacks.terminal._cc_no_auto_insert = true
+      end
+    end,
     keys = {
       { "<leader>a", nil, desc = "AI/Claude Code" },
       { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
