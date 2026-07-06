@@ -39,15 +39,30 @@ vim.lsp.config("clangd", {
 vim.lsp.enable "clangd"
 
 -- pyright config
+-- Pick up the project venv automatically: walk up from root_dir looking for
+-- .venv/bin/python; fall back to `python3` on $PATH. A per-project
+-- pyrightconfig.json (if present) still supplies extraPaths, report flags, etc.
 vim.lsp.config("pyright", {
   on_attach = on_attach,
   capabilities = capabilities,
   filetypes = { "python" },
-  settings = {
-    python = {
-      pythonPath = vim.fn.exepath "python3",
-    },
-  },
+  before_init = function(_, config)
+    local path = config.root_dir
+    local venv_python = nil
+    while path and path ~= "/" do
+      local candidate = path .. "/.venv/bin/python"
+      if vim.fn.executable(candidate) == 1 then
+        venv_python = candidate
+        break
+      end
+      path = vim.fn.fnamemodify(path, ":h")
+    end
+    config.settings = {
+      python = {
+        pythonPath = venv_python or vim.fn.exepath "python3",
+      },
+    }
+  end,
 })
 vim.lsp.enable "pyright"
 
