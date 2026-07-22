@@ -43,7 +43,7 @@ Then restart Neovim and run `:TSInstallAll` again.
 For LaTeX:
 
 ```shell
-sudo apt install latexmk zathura
+sudo apt install latexmk zathura texlive-fonts-extra texlive-science texlive-latex-extra
 ```
 
 > Below is the original README from NvChad

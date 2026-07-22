@@ -70,7 +70,7 @@ return {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
     config = function()
-      require("claudecode").setup({})
+      require("claudecode").setup {}
       -- claudecode.nvim drives Snacks with `auto_insert = true`, which makes
       -- Snacks register a buffer-local BufEnter -> startinsert autocmd on the
       -- Claude terminal. That means plain window navigation (Ctrl-w, :wincmd,
@@ -87,7 +87,7 @@ return {
         Snacks.terminal.open = function(cmd, opts)
           opts = vim.tbl_deep_extend("force", {}, opts or {})
           local cmd_str = type(cmd) == "table" and table.concat(cmd, " ") or tostring(cmd)
-          if cmd_str:find("claude") then
+          if cmd_str:find "claude" then
             opts.auto_insert = false
           end
           return original_open(cmd, opts)
@@ -116,67 +116,6 @@ return {
       { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
     },
   },
-  -- {
-  --   "olimorris/codecompanion.nvim",
-  --   version = "^19.0.0",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     adapters = {
-  --       claude_code = function()
-  --         return require("codecompanion.adapters").extend("claude_code", {
-  --           schema = {
-  --           },
-  --         })
-  --       end,
-  --       http = {
-  --         anthropic = function()
-  --           return require("codecompanion.adapters").extend("anthropic", {
-  --             -- url = "https://chat.cloudapi.vip/v1/messages",
-  --             url = "https://open.bigmodel.cn/api/paas/v4/messages",
-  --             env = {
-  --               api_key = "ANTHROPIC_API_KEY",
-  --             },
-  --             schema = {
-  --               model = {
-  --                 -- default = "claude-opus-4-5-20251101-code",
-  --                 default = "gpt-5.3-codex-medium",
-  --               },
-  --             },
-  --           })
-  --         end,
-  --         openai = function()
-  --           return require("codecompanion.adapters").extend("openai", {
-  --             -- url = "https://chat.cloudapi.vip/v1/chat/completions",
-  --             url = "https://open.bigmodel.cn/api/paas/v4/chat/completions",
-  --             env = {
-  --               api_key = "Z_AI_API_KEY",
-  --             },
-  --             schema = {
-  --               model = {
-  --                 -- default = "claude-opus-4-6-code",
-  --                 default = "glm-4.7",
-  --               },
-  --             },
-  --           })
-  --         end,
-  --       },
-  --     },
-  --     interactions = {
-  --       chat = {
-  --         -- adapter = "openai",
-  --         adapter = "claude_code",
-  --       },
-  --       inline = {
-  --         -- adapter = "openai",
-  --         adapter = "claude_code",
-  --       },
-  --     },
-  --   },
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-treesitter/nvim-treesitter",
-  --   },
-  -- },
   {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown", "codecompanion" },
@@ -280,11 +219,21 @@ return {
   },
   {
     "lervag/vimtex",
+    cond = vim.env.NVIM_ENABLE_RENDER_PLUGINS == "true", -- only load if the environment variable is set
     lazy = false, -- we don't want to lazy load VimTeX
     -- tag = "v2.15", -- uncomment to pin to a specific release
     init = function()
       -- VimTeX configuration goes here, e.g.
       vim.g.vimtex_view_method = "zathura"
+    end,
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cond = vim.env.NVIM_ENABLE_RENDER_PLUGINS == "true", -- only load if the environment variable is set
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
     end,
   },
 }
